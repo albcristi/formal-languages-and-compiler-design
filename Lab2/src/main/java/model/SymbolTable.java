@@ -13,16 +13,8 @@ public class SymbolTable {
         return hashTable.addElement(identifier);
     }
 
-    public Pair<Integer, Integer>  add(Integer constant){
-        return hashTable.addElement(constant.toString());
-    }
-
     public Pair<Integer, Integer> search(String identifier){
         return hashTable.search(identifier);
-    }
-
-    public Pair<Integer, Integer> search(Integer constant){
-        return hashTable.search(constant.toString());
     }
 
 }
