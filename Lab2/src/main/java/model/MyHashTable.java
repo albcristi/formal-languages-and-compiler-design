@@ -31,6 +31,7 @@ public class MyHashTable {
             // case when we don't have an element already added
             // at this address (no collision)
             Node node = new Node(identifier, 0, null);
+            node.prevNode = null;
             return new Pair<>(hashValue, 0);
 
         }
@@ -39,6 +40,7 @@ public class MyHashTable {
             currentNode = currentNode.nextNode;
         }
         Node newNode = new Node(identifier, currentNode.index+1,currentNode);
+        newNode.prevNode = currentNode;
         currentNode.nextNode = newNode;
         return new Pair<>(hashValue,newNode.index);
     }
@@ -54,7 +56,6 @@ public class MyHashTable {
                 currentNode = currentNode.nextNode;
             }
         }
-
         return new Pair<>(-1,-1);
     }
 }
