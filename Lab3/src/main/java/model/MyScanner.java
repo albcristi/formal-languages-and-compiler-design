@@ -347,6 +347,8 @@ public class MyScanner {
             FileWriter fileWriter = new FileWriter("./lexical-analysis-out/lexical-errors.out");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println(errorList.size());
+            String msg = errorList.size()>0 ? "lexically incorrect" : "lexically correct";
+            printWriter.println(msg);
             for(String error: errorList)
                 printWriter.println(error);
             printWriter.close();
