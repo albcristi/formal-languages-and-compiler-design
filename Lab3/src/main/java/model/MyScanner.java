@@ -41,7 +41,7 @@ public class MyScanner {
         }
     }
 
-    public Boolean isConstant(String token) {
+    private Boolean isConstant(String token) {
         return token.matches("\\-?[1-9]+[0-9]*|0")
                 || token.matches("\"[a-zA-Z0-9 _]+\"")
                 || token.equals("true")
@@ -130,7 +130,7 @@ public class MyScanner {
         return lineTokens;
     }
 
-    public List<String> mySpecialSplit(String string, String tok) {
+    private List<String> mySpecialSplit(String string, String tok) {
         List<String> result = new ArrayList<>();
         if (string.equals(tok)) {
             result.add(string);
@@ -151,7 +151,7 @@ public class MyScanner {
         return result;
     }
 
-    public List<String> tokenizeFinalVersion(List<String> tokens){
+    private List<String> tokenizeFinalVersion(List<String> tokens){
         tokens = tokenizeSpecialCasesForEqualSign(tokens);
         tokens = specialInputOutputCommands(tokens);
         tokens = specialStringConstants(tokens);
@@ -159,7 +159,7 @@ public class MyScanner {
         return tokens;
     }
 
-    public List<String> tokenizeSpecialCasesForEqualSign(List<String> tokens){
+    private List<String> tokenizeSpecialCasesForEqualSign(List<String> tokens){
         if(!tokens.toString().contains("="))
             return tokens;
         /*
@@ -183,7 +183,7 @@ public class MyScanner {
         return betterVersion;
     }
 
-    public List<String> specialInputOutputCommands(List<String> tokens){
+    private List<String> specialInputOutputCommands(List<String> tokens){
         /*
         In the case of the I/O operations we might have
                 give, Inti
@@ -207,7 +207,7 @@ public class MyScanner {
         return tokenized;
     }
 
-    public List<String> specialStringConstants(List<String> tokens){
+    private List<String> specialStringConstants(List<String> tokens){
         if(!tokens.toString().contains("\""))
                 return tokens;
         List<String> betterTokenized = new ArrayList<>();
@@ -238,7 +238,7 @@ public class MyScanner {
         return betterTokenized;
     }
 
-    public List<String> specialIntegerConstants(List<String> tokens){
+    private List<String> specialIntegerConstants(List<String> tokens){
         /*
         We can have number of form
                 +no
@@ -281,7 +281,7 @@ public class MyScanner {
         }
     }
 
-    public void writeST(){
+    private void writeST(){
         try{
             /*
               st.out file format
@@ -316,7 +316,7 @@ public class MyScanner {
 
     }
 
-    public void writePIF(){
+    private void writePIF(){
         try{
             /*
              pif.out file format
@@ -342,7 +342,7 @@ public class MyScanner {
 
     }
 
-    public void writeLexicalErrors(){
+    private void writeLexicalErrors(){
         try {
             FileWriter fileWriter = new FileWriter("./lexical-analysis-out/lexical-errors.out");
             PrintWriter printWriter = new PrintWriter(fileWriter);
