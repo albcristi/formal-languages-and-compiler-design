@@ -72,6 +72,7 @@ public class MyScanner {
                     detectedTokens = tokenize(detectedTokens);
                     //we need to make sure our numerical constants are well formed
                     detectedTokens = tokenizeFinalVersion(detectedTokens);
+                    //System.out.println(detectedTokens);
                     //after this part we do the classification of each token
                     // and add to PIF and ST the necessary data
                     for(String token: detectedTokens) {
@@ -103,6 +104,13 @@ public class MyScanner {
             reader.close();
             writeST();
             writePIF();
+            if(errorList.size()==0)
+                System.out.println("Lexically correct");
+            else {
+                System.out.println("Lexically incorrect");
+                for(String str: errorList)
+                    System.out.println(str);
+            }
             writeLexicalErrors();
         }
         catch (FileNotFoundException e){
@@ -248,25 +256,27 @@ public class MyScanner {
                 no1-no2
        In this way, we reunite -/+ with a no in case of:
                             - -/+ is the first token of the list followed by a number
-                            - the token before -/+ is not a number and the token after is a number
+                            - the token before -/+ is not a number/identifier and the token after is a number
          */
-        if(tokens.size() < 2)
+        if(tokens.size() <= 2)
             return tokens;
         List<String> tokenized = new ArrayList<>();
 
         for(int i=1; i<tokens.size()-1; i++){
-            if((tokens.get(i).equals("+") || tokens.get(i).equals("-"))
-                && isNumber(tokens.get(i+1)) && !isNumber(tokens.get(i-1))){
-                tokenized.add(tokens.get(i)+tokens.get(i+1));
-                i++;
-            }
-            else{
-                if(i-1==0)
-                    tokenized.add(tokens.get(0));
-                tokenized.add(tokens.get(i));
-                if(i+1 == tokens.size()-1)
-                    tokenized.add(tokens.get(i+1));
-            }
+           if((tokens.get(i).equals("+")||tokens.get(i).equals("-"))
+                && isNumber(tokens.get(i+1))
+                && !isNumber(tokens.get(i-1))
+                && !isIdentifier(tokens.get(i-1))) {
+               tokenized.add(tokens.get(i) + tokens.get(i + 1));
+               i++;
+           }
+           else{
+               if(i-1==0)
+                   tokenized.add(tokens.get(0));
+               tokenized.add(tokens.get(i));
+               if(i+1==tokens.size()-1)
+                   tokenized.add(tokens.get(i+1));
+           }
         }
         return tokenized;
     }

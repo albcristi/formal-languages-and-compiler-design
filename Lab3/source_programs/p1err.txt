@@ -1,6 +1,6 @@
 inti 12a, b, c, result;
 say("Give me a number");
-giveInti( 12a );
+giveInti( & );
 say("Give me a number");
 giveInti(b);
 say("Give me a number");

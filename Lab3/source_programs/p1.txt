@@ -1,9 +1,9 @@
-inti a, b, c, result;
-say(“GiveMeTheSecondNumber");
+inti c,a,b, result;
+say("Give Me TheSecondNumber");
 giveInti(a);
-say(“GiveMeTheSecondNumber");
+say("GiveMeTheSecondNumber");
 giveInti(a);
-say(“GiveMeTheSecondNumber");
+say("GiveMeTheSecondNumber");
 giveInti(c);
 hmm( a > b){
 result = a;
@@ -14,5 +14,5 @@ result = b;
 hmm(result<c){
 result = c;
 }
-say(“ResultIs");
+say("ResultIs");
 sayInti(result);
