@@ -15,6 +15,8 @@ public class MyScanner {
     private SymbolTable symbolTable;
     private List<Pair<String, Pair<Integer,Integer>>> pif; // smth like Token/CT/ID position in the st or (0,-1) for Tokens
     private List<String> errorList = new ArrayList<>();
+    private FiniteAutomata integerFA = new FiniteAutomata("./fa_input/integer.in");
+    private FiniteAutomata identifierFA = new FiniteAutomata("./fa_input/identifier.in");
     public MyScanner(String pathToSourceProgram) {
         this.tokens = new ArrayList<>();
         this.sourceProgram = pathToSourceProgram;
@@ -42,14 +44,17 @@ public class MyScanner {
     }
 
     private Boolean isConstant(String token) {
-        return token.matches("\\-?[1-9]+[0-9]*|0")
-                || token.matches("\"[a-zA-Z0-9 _]+\"")
+        return token.matches("\"[a-zA-Z0-9 _]+\"")
                 || token.equals("true")
                 || token.equals("false");
     }
 
+    private Boolean isIntegerConstant(String token){
+        return integerFA.isAccepted(token);
+    }
+
     private Boolean isIdentifier(String token){
-        return token.matches("(^[a-zA-Z][a-zA-Z0-9]*)");
+        return identifierFA.isAccepted(token);
     }
 
 
@@ -85,7 +90,7 @@ public class MyScanner {
                         }
                         else {
                             // we need to see if we deal with an identifier or a constant
-                            if(isIdentifier(token) || isConstant(token)){
+                            if(isIdentifier(token) || isConstant(token) || isIntegerConstant(token)){
                                 Pair<Integer, Integer> position = symbolTable.search(token);
                                 String whatIS = isIdentifier(token) ? "ID" : "CONST";
                                 if(position.fst == -1)

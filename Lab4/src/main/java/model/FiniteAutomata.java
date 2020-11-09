@@ -75,41 +75,22 @@ public class FiniteAutomata {
         return states;
     }
 
-    public void setStates(List<String> states) {
-        this.states = states;
-    }
-
     public List<String> getAlphabet() {
         return alphabet;
-    }
-
-    public void setAlphabet(List<String> alphabet) {
-        this.alphabet = alphabet;
     }
 
     public String getInitialState() {
         return initialState;
     }
 
-    public void setInitialState(String initialState) {
-        this.initialState = initialState;
-    }
-
     public List<String> getFinalStates() {
         return finalStates;
-    }
-
-    public void setFinalStates(List<String> finalStates) {
-        this.finalStates = finalStates;
     }
 
     public List<AutomataTransition> getTransitionFunction() {
         return transitionFunction;
     }
 
-    public void setTransitionFunction(List<AutomataTransition> transitionFunction) {
-        this.transitionFunction = transitionFunction;
-    }
 
 
     public Boolean isDFA(){

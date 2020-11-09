@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) {
-        lab6();
-        /*
         try {
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(System.in));
@@ -21,10 +19,10 @@ public class Main {
             System.out.println("MAKE SURE FILE PATH IS GOOD");
             System.out.println("Other remarks");
             System.out.println(e.getMessage());
-        }*/
+        }
     }
 
-    private static void lab6(){
+    private static void lab4(){
         FiniteAutomata fa = new FiniteAutomata("./fa.in");
         CommandLineUI ui = new CommandLineUI(fa);
         ui.run();

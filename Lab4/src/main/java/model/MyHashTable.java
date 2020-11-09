@@ -16,6 +16,7 @@ public class MyHashTable {
         elements = new Node[m];
     }
 
+
     private Integer hashingFunction(String identifier){
         Integer sum = 0;
         for(int i=0; i<identifier.length(); i++){
