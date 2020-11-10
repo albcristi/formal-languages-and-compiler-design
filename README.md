@@ -13,4 +13,4 @@ Lab4 - FA implementation and integration with Scanner for integer constants and 
 # Documentation 
 
 Please see the Docs folder from the master branch, there you can find the documentations for each laboratory.  
-There will also be a file named: flcd.drawio, representing the class diagram, you can open it useing draw.io on Google
+There will also be a file named: flcd.drawio, representing the class diagram, you can open it using draw.io on Google
