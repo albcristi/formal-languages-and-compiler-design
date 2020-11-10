@@ -7,9 +7,23 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) {
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(System.in));
+        String command = "";
+        System.out.println("1 - Run FA");
+        System.out.println("2 - Run Scanner");
+        System.out.println("Give command");
         try {
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(System.in));
+            command = reader.readLine();
+        }
+        catch (Exception e){
+            System.exit(0);
+        }
+        if(command.equals("1")){
+            lab4();
+            System.exit(0);
+        }
+        try {
             System.out.println("Enter program location:");
             String filePath = reader.readLine();
             MyScanner scanner = new MyScanner(filePath);
