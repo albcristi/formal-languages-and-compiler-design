@@ -11,6 +11,7 @@ WORD             ["]([ _a-zA-Z])*["]
 NUMBER            [1-9][0-9]*|0
 ID                [a-zA-Z][a-zA-Z0-9]*
 CT                {NUMBER}|{WORD}
+INVALID_ID        [0-9][a-zA-Z][a-zA-Z0-9]*
 
 %%
 
@@ -28,6 +29,7 @@ CT                {NUMBER}|{WORD}
 "or"            {printf("Reserved word: %s\n", yytext); return or;}
 "repeatAfterMe" {printf("Reserved word: %s\n", yytext); return repeatAfterMe;}
 
+{INVALID_ID}    {printf("Illegal symbol: %s at line %u", yytext, lines+1); return -1;}
 {ID}            {printf("Identifier: %s\n", yytext); return id;}
 {CT}            {printf("Constant: %s\n", yytext); return ct;}
 
@@ -52,7 +54,7 @@ CT                {NUMBER}|{WORD}
 ","             {printf("Separator: %s\n", yytext); return COMMA;}
 [ \t]+          {}
 [\n]            {++lines;}
-.               {printf("Illegal symbol: %s at line %u", yytext, lines); return -1;}  
+.               {printf("Illegal symbol: %s at line %u", yytext, lines+1); return -1;}  
 %%
 
 int yywrap(void){
