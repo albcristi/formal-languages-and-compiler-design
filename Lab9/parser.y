@@ -44,80 +44,82 @@
 
 %%
 
-program: StmtList;
+program: StmtList {printf(" START - 0 -")}
 
-StmtList: Stmt StmtList
-        | Stmt;
+StmtList: Stmt StmtList {printf(" 1\n");}
+        | Stmt  {printf(" 2\n");};
 
-Stmt: Decl 
-    | Ifstmt
-    | Forstmt
-    | Assignstmt
-    | Returnstmt 
-    | Iostmt;
+Stmt: Decl {printf(" 3\n");}
+    | Ifstmt  {printf(" 4\n");}
+    | Forstmt {printf(" 5\n");}
+    | Assignstmt {printf(" 6\n");}
+    | Returnstmt {printf(" 7\n");}
+    | Iostmt  {printf(" 8\n");};
 
-Decl: DType id SEMI_COL
-    | DType id COMMA Decl;
+Decl: DType id SEMI_COL {printf(" 9\n");}
+    | DType id COMMA Decl {printf(" 10\n");};
 
-DType: inti_dt OPEN_SQUARE ct CLOSED_SQUARE
-     | string_dt OPEN_SQUARE ct CLOSED_SQUARE
-     | inti_dt
-     | string_dt
-     | bool_dt;
+DType: inti_dt OPEN_SQUARE ct CLOSED_SQUARE {printf(" 11\n");}
+     | string_dt OPEN_SQUARE ct CLOSED_SQUARE {printf(" 12\n");}
+     | inti_dt {printf(" 13\n");}
+     | string_dt {printf(" 14\n");}
+     | bool_dt {printf(" 15\n");};
 
-Ifstmt: hmm OPEN_ROUND Condition CLOSED_ROUND OPEN_ACCOL StmtList CLOSED_ACCOL nah OPEN_ACCOL StmtList CLOSED_ACCOL
-      | hmm OPEN_ROUND Condition CLOSED_ROUND OPEN_ACCOL StmtList CLOSED_ACCOL;
+Ifstmt: hmm OPEN_ROUND Condition CLOSED_ROUND OPEN_ACCOL StmtList CLOSED_ACCOL nah OPEN_ACCOL StmtList CLOSED_ACCOL {printf(" 16\n");}
+      | hmm OPEN_ROUND Condition CLOSED_ROUND OPEN_ACCOL StmtList CLOSED_ACCOL {printf(" 17\n");};
 
-Condition: Expression Relation Expression and Condition
-         | Expression Relation Expression or Condition
-         | Expression Relation Expression;
+Condition: Expression Relation Expression and Condition {printf(" 18\n");}
+         | Expression Relation Expression or Condition {printf(" 19\n");}
+         | Expression Relation Expression {printf(" 20\n");};
 
-Relation: LESS
-        | LESS_OR_EQUAL
-        | EQUAL
-        | GREATER_OR_EQUAL
-        | GREATER;
+Relation: LESS  {printf(" 21\n");}
+        | LESS_OR_EQUAL {printf(" 22\n");}
+        | EQUAL {printf(" 23\n");}
+        | GREATER_OR_EQUAL {printf(" 24\n");}
+        | GREATER {printf(" 25\n");};
 
-Forstmt: repeatAfterMe ForCond ForBody;
+Forstmt: repeatAfterMe ForCond ForBody {printf(" 26\n");};
 
-ForCond: OPEN_ROUND Assignstmt Condition SEMI_COL ct CLOSED_ROUND;
+ForCond: OPEN_ROUND Assignstmt Condition SEMI_COL ct CLOSED_ROUND {printf(" 27\n");};
 
-ForBody: OPEN_ACCOL StmtList CLOSED_ACCOL;
+ForBody: OPEN_ACCOL StmtList CLOSED_ACCOL {printf(" 28\n");};
 
-Assignstmt: id ASSIGN Expression SEMI_COL;
+Assignstmt: id ASSIGN Expression SEMI_COL {printf(" 29\n");};
 
-Returnstmt: adiosBoys SEMI_COL;
+Returnstmt: adiosBoys SEMI_COL {printf(" 30\n");};
 
-Iostmt: Istmt
-      | Ostmt;
+Iostmt: Istmt {printf(" 31\n")}
+      | Ostmt {printf(" 32\n");};
+ 
+Istmt: IntIstmt {printf(" 33\n");}
+     | StringIstmt {printf(" 34\n");};
 
-Istmt: IntIstmt
-     | StringIstmt;
+IntIstmt: giveInti OPEN_ROUND id CLOSED_ROUND SEMI_COL {printf(" 35\n");};
 
-IntIstmt: giveInti OPEN_ROUND id CLOSED_ROUND SEMI_COL;
+StringIstmt: give OPEN_ROUND id CLOSED_ROUND SEMI_COL {printf(" 36");};
 
-StringIstmt: give OPEN_ROUND id CLOSED_ROUND SEMI_COL;
+Ostmt: IntOstmt {printf(" 37");}
+     | StringOstmt {printf(" 38");};
 
-Ostmt: IntOstmt
-     | StringOstmt;
+IntOstmt: sayInti OPEN_ROUND Param CLOSED_ROUND SEMI_COL {printf(" 39\n");};
 
-IntOstmt: sayInti OPEN_ROUND Param CLOSED_ROUND SEMI_COL;
+StringOstmt: say OPEN_ROUND Param CLOSED_ROUND SEMI_COL {printf(" 40\n");};
 
-StringOstmt: say OPEN_ROUND Param CLOSED_ROUND SEMI_COL;
+Param: id {printf(" 41\n");}
+     | ct {printf(" 42\n");};
 
-Param: id | ct;
+Expression: ArithmExpr {printf(" 43\n");};
 
-Expression: ArithmExpr;
+ArithmExpr: term {printf(" 44\n");}
+           | term plus ArithmExpr {printf(" 45\n");}
+           | term MINUS ArithmExpr {printf(" 46\n");}
+           | term MULTIPLY ArithmExpr  {printf(" 47\n");}
+           | term DIVISION ArithmExpr  {printf(" 48\n");}
+           | term REMAINDER ArithmExpr {printf(" 49\n");}
+           | OPEN_ROUND ArithmExpr CLOSED_ROUND {printf(" 50\n");};
 
-ArithmExpr : term
-           | term plus ArithmExpr
-           | term MINUS ArithmExpr 
-           | term MULTIPLY ArithmExpr 
-           | term DIVISION ArithmExpr 
-           | term REMAINDER ArithmExpr
-           | OPEN_ROUND ArithmExpr CLOSED_ROUND ;
-
-term : id | ct ;    
+term: id  {printf(" 51\n");}
+| ct  {printf(" 52\n");};    
 
 %%
 
